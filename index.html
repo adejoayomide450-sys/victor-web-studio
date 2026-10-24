@@ -4,7 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#101828">
+<meta name="description" content="VicDev builds modern websites and digital solutions for businesses, schools, restaurants, and entrepreneurs.">
 <title>VicDev | Websites That Grow Businesses</title>
+
+<!-- Supabase JavaScript client -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 :root {
@@ -14,570 +18,145 @@
   --light: #f5f7fb;
   --text: #344054;
   --white: #ffffff;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: Arial, sans-serif;
-  color: var(--text);
-  background: var(--white);
-  line-height: 1.6;
-}
-
-button, input, select, textarea {
-  font: inherit;
-}
-
-button, a {
-  -webkit-tap-highlight-color: transparent;
-}
-
-button {
-  cursor: pointer;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.container {
-  width: min(1120px, 90%);
-  margin: auto;
-}
-
-header {
-  background: var(--white);
-  border-bottom: 1px solid #eaecf0;
-  position: sticky;
-  top: 0;
-  z-index: 10;
-}
-
-.nav {
-  min-height: 76px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-}
-
-.logo {
-  font-size: 24px;
-  font-weight: 900;
-  color: var(--dark);
-}
-
-.logo span {
-  color: var(--blue);
-}
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 22px;
-  font-size: 14px;
-}
-
-.btn {
-  border: none;
-  border-radius: 9px;
-  padding: 12px 18px;
-  display: inline-block;
-  font-weight: 700;
-  transition: .2s;
-}
-
-.btn:hover {
-  transform: translateY(-2px);
-}
-
-.btn-primary {
-  background: var(--blue);
-  color: white;
-}
-
-.btn-dark {
-  background: var(--dark);
-  color: white;
-}
-
-.btn-outline {
-  border: 1px solid #d0d5dd;
-  background: white;
-  color: var(--dark);
-}
-
-.hero {
-  background:
-    radial-gradient(circle at 85% 20%, #dce5ff, transparent 32%),
-    linear-gradient(135deg, #f8faff, #ffffff);
-  padding: 95px 0;
-}
-
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1.15fr .85fr;
-  align-items: center;
-  gap: 50px;
-}
-
-.badge {
-  display: inline-block;
-  background: #e9efff;
-  color: #2346c8;
-  border-radius: 30px;
-  padding: 7px 13px;
-  font-size: 13px;
-  font-weight: 700;
-  margin-bottom: 20px;
-}
-
-h1 {
-  font-size: clamp(38px, 5vw, 60px);
-  color: var(--dark);
-  line-height: 1.1;
-  letter-spacing: -2px;
-  margin-bottom: 22px;
-}
-
-h1 span {
-  color: var(--blue);
-}
-
-.hero p {
-  font-size: 17px;
-  max-width: 570px;
-  margin-bottom: 28px;
-}
-
-.hero-actions {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.hero-card {
-  background: var(--dark);
-  color: white;
-  padding: 30px;
-  border-radius: 22px;
-  box-shadow: 0 25px 70px #10182825;
-}
-
-.hero-card h2 {
-  font-size: 23px;
-  margin-bottom: 12px;
-}
-
-.hero-card p {
-  font-size: 14px;
-  color: #d0d5dd;
-}
-
-.mini-card {
-  background: #ffffff12;
-  border: 1px solid #ffffff20;
-  border-radius: 12px;
-  padding: 17px;
-  margin-top: 14px;
-}
-
-.mini-card strong {
-  color: var(--gold);
-}
-
-section {
-  padding: 75px 0;
-}
-
-.section-heading {
-  text-align: center;
-  max-width: 650px;
-  margin: 0 auto 40px;
-}
-
-.section-heading h2 {
-  font-size: 34px;
-  color: var(--dark);
-  margin-bottom: 12px;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
-}
-
-.card {
-  border: 1px solid #eaecf0;
-  border-radius: 16px;
-  padding: 25px;
-  background: white;
-  transition: .2s;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 35px #10182810;
-}
-
-.card-icon {
-  font-size: 29px;
-  margin-bottom: 14px;
-}
-
-.card h3 {
-  color: var(--dark);
-  margin-bottom: 9px;
-}
-
-.card p {
-  font-size: 14px;
-  margin-bottom: 15px;
-}
-
-.price {
-  color: var(--blue);
-  font-size: 20px;
-  font-weight: 800;
-}
-
-.projects {
-  background: var(--light);
-}
-
-.project-preview {
-  background: linear-gradient(135deg, #e6ecff, #f9e8c2);
-  min-height: 150px;
-  border-radius: 12px;
-  display: grid;
-  place-items: center;
-  font-size: 42px;
-  margin-bottom: 17px;
-}
-
-.about-box {
-  background: var(--dark);
-  color: white;
-  padding: 38px;
-  border-radius: 20px;
-}
-
-.about-box h2 {
-  font-size: 32px;
-  margin-bottom: 15px;
-}
-
-.about-box p {
-  color: #d0d5dd;
-}
-
-.contact {
-  background: var(--light);
-}
-
-.contact-grid {
-  display: grid;
-  grid-template-columns: .8fr 1.2fr;
-  gap: 30px;
-}
-
-.contact-info, .form-box {
-  background: white;
-  border-radius: 16px;
-  padding: 28px;
-  border: 1px solid #eaecf0;
-}
-
-.contact-info h3, .form-box h3 {
-  color: var(--dark);
-  margin-bottom: 18px;
-}
-
-.contact-info p {
-  margin: 12px 0;
-  overflow-wrap: anywhere;
-}
-
-.form-group {
-  margin-bottom: 16px;
-}
-
-label {
-  display: block;
-  font-weight: 700;
-  color: var(--dark);
-  font-size: 14px;
-  margin-bottom: 6px;
-}
-
-input, select, textarea {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #d0d5dd;
-  border-radius: 8px;
-  outline: none;
-  background: white;
-  color: var(--dark);
-}
-
-input:focus, select:focus, textarea:focus {
-  border-color: var(--blue);
-  box-shadow: 0 0 0 3px #315efb18;
-}
-
-textarea {
-  min-height: 100px;
-  resize: vertical;
-}
-
-footer {
-  padding: 25px 0;
-  background: var(--dark);
-  color: white;
-  text-align: center;
-  font-size: 14px;
-}
-
-.admin-section {
-  display: none;
-  min-height: 70vh;
-  background: var(--light);
-}
-
-.admin-panel {
-  background: white;
-  border-radius: 15px;
-  padding: 25px;
-  border: 1px solid #eaecf0;
-}
-
-.admin-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 15px;
-  margin-bottom: 24px;
-}
-
-.admin-top h2 {
-  color: var(--dark);
-}
-
-.stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 15px;
-  margin-bottom: 25px;
-}
-
-.stat {
-  background: #f5f7fb;
-  padding: 18px;
-  border-radius: 10px;
-}
-
-.stat strong {
-  display: block;
-  font-size: 26px;
-  color: var(--blue);
-}
-
-.table-wrap {
-  overflow-x: auto;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 650px;
-}
-
-th, td {
-  text-align: left;
-  padding: 13px;
-  border-bottom: 1px solid #eaecf0;
-  font-size: 13px;
-  vertical-align: top;
-}
-
-th {
-  background: #f9fafb;
-  color: var(--dark);
-}
-
-.status-select {
-  min-width: 125px;
-  padding: 7px;
-}
-
-.small-btn {
-  padding: 7px 10px;
-  border: none;
-  border-radius: 6px;
-  background: #fee4e2;
-  color: #b42318;
-  font-weight: 700;
-}
-
-.modal {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  background: #101828b8;
-  padding: 20px;
-  align-items: center;
-  justify-content: center;
-}
-
-.modal-box {
-  width: min(420px, 100%);
-  background: white;
-  padding: 28px;
-  border-radius: 16px;
-}
-
-.modal-box h2 {
-  color: var(--dark);
-  margin-bottom: 10px;
-}
-
-.modal-box p {
-  font-size: 14px;
-  margin-bottom: 20px;
-}
-
-.modal-actions {
-  display: flex;
-  gap: 10px;
-  margin-top: 15px;
-}
-
-.notice {
-  font-size: 13px;
-  color: #667085;
-  margin-top: 12px;
-}
-
-.empty {
-  text-align: center;
-  padding: 30px;
-  color: #667085;
-}
-
-.hidden {
-  display: none !important;
-}
+  --border: #eaecf0;
+  --muted: #667085;
+  --green: #067647;
+  --red: #b42318;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: Arial, sans-serif; color: var(--text); background: var(--white); line-height: 1.6; }
+button, input, select, textarea { font: inherit; }
+button, a { -webkit-tap-highlight-color: transparent; }
+button { cursor: pointer; }
+button:disabled { opacity: .65; cursor: not-allowed; transform: none; }
+a { color: inherit; text-decoration: none; }
+.container { width: min(1120px, 90%); margin: auto; }
+
+header { background: var(--white); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 10; }
+.nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.logo { font-size: 24px; font-weight: 900; color: var(--dark); }
+.logo span { color: var(--blue); }
+.nav-links { display: flex; align-items: center; gap: 22px; font-size: 14px; }
+.btn { border: none; border-radius: 9px; padding: 12px 18px; display: inline-block; font-weight: 700; transition: .2s; }
+.btn:hover { transform: translateY(-2px); }
+.btn-primary { background: var(--blue); color: white; }
+.btn-dark { background: var(--dark); color: white; }
+.btn-outline { border: 1px solid #d0d5dd; background: white; color: var(--dark); }
+
+.hero { background: radial-gradient(circle at 85% 20%, #dce5ff, transparent 32%), linear-gradient(135deg, #f8faff, #ffffff); padding: 95px 0; }
+.hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; align-items: center; gap: 50px; }
+.badge { display: inline-block; background: #e9efff; color: #2346c8; border-radius: 30px; padding: 7px 13px; font-size: 13px; font-weight: 700; margin-bottom: 20px; }
+h1 { font-size: clamp(38px, 5vw, 60px); color: var(--dark); line-height: 1.1; letter-spacing: -2px; margin-bottom: 22px; }
+h1 span { color: var(--blue); }
+.hero p { font-size: 17px; max-width: 570px; margin-bottom: 28px; }
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.hero-card { background: var(--dark); color: white; padding: 30px; border-radius: 22px; box-shadow: 0 25px 70px #10182825; }
+.hero-card h2 { font-size: 23px; margin-bottom: 12px; }
+.hero-card p { font-size: 14px; color: #d0d5dd; margin-bottom: 0; }
+.mini-card { background: #ffffff12; border: 1px solid #ffffff20; border-radius: 12px; padding: 17px; margin-top: 14px; }
+.mini-card strong { color: var(--gold); }
+
+section { padding: 75px 0; }
+.section-heading { text-align: center; max-width: 650px; margin: 0 auto 40px; }
+.section-heading h2 { font-size: 34px; color: var(--dark); margin-bottom: 12px; }
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.card { border: 1px solid var(--border); border-radius: 16px; padding: 25px; background: white; transition: .2s; }
+.card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px #10182810; }
+.card-icon { font-size: 29px; margin-bottom: 14px; }
+.card h3 { color: var(--dark); margin-bottom: 9px; }
+.card p { font-size: 14px; margin-bottom: 15px; }
+.projects { background: var(--light); }
+.project-preview { background: linear-gradient(135deg, #e6ecff, #f9e8c2); min-height: 150px; border-radius: 12px; display: grid; place-items: center; font-size: 42px; margin-bottom: 17px; }
+.about-box { background: var(--dark); color: white; padding: 38px; border-radius: 20px; }
+.about-box h2 { font-size: 32px; margin-bottom: 15px; }
+.about-box p { color: #d0d5dd; }
+
+.contact { background: var(--light); }
+.contact-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 30px; }
+.contact-info, .form-box { background: white; border-radius: 16px; padding: 28px; border: 1px solid var(--border); }
+.contact-info h3, .form-box h3 { color: var(--dark); margin-bottom: 18px; }
+.contact-info p { margin: 12px 0; overflow-wrap: anywhere; }
+.form-group { margin-bottom: 16px; }
+label { display: block; font-weight: 700; color: var(--dark); font-size: 14px; margin-bottom: 6px; }
+input, select, textarea { width: 100%; padding: 12px; border: 1px solid #d0d5dd; border-radius: 8px; outline: none; background: white; color: var(--dark); }
+input:focus, select:focus, textarea:focus { border-color: var(--blue); box-shadow: 0 0 0 3px #315efb18; }
+textarea { min-height: 100px; resize: vertical; }
+footer { padding: 25px 0; background: var(--dark); color: white; text-align: center; font-size: 14px; }
+
+.admin-section { display: none; min-height: 70vh; background: var(--light); }
+.admin-panel { background: white; border-radius: 15px; padding: 25px; border: 1px solid var(--border); }
+.admin-top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 24px; }
+.admin-top h2 { color: var(--dark); }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 25px; }
+.stat { background: var(--light); padding: 18px; border-radius: 10px; }
+.stat strong { display: block; font-size: 26px; color: var(--blue); }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; min-width: 760px; }
+th, td { text-align: left; padding: 13px; border-bottom: 1px solid var(--border); font-size: 13px; vertical-align: top; white-space: pre-line; }
+th { background: #f9fafb; color: var(--dark); }
+.status-select { min-width: 125px; padding: 7px; }
+.small-btn { padding: 7px 10px; border: none; border-radius: 6px; background: #fee4e2; color: var(--red); font-weight: 700; }
+.modal { display: none; position: fixed; inset: 0; z-index: 100; background: #101828b8; padding: 20px; align-items: center; justify-content: center; }
+.modal-box { width: min(420px, 100%); background: white; padding: 28px; border-radius: 16px; max-height: 90vh; overflow-y: auto; }
+.modal-box h2 { color: var(--dark); margin-bottom: 10px; }
+.modal-box p { font-size: 14px; margin-bottom: 20px; }
+.modal-actions { display: flex; gap: 10px; margin-top: 15px; }
+.notice { font-size: 13px; color: var(--muted); margin-top: 12px; }
+.message-success { color: var(--green); }
+.message-error { color: var(--red); }
+.empty { text-align: center; padding: 30px; color: var(--muted); }
+.hidden { display: none !important; }
 
 @media(max-width: 800px) {
-  .hero-grid, .contact-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .hero {
-    padding: 65px 0;
-  }
-
-  .nav-links {
-    gap: 12px;
-  }
-
-  .nav-links a:not(.btn) {
-    display: none;
-  }
+  .hero-grid, .contact-grid { grid-template-columns: 1fr; }
+  .grid { grid-template-columns: repeat(2, 1fr); }
+  .hero { padding: 65px 0; }
+  .nav-links { gap: 12px; }
+  .nav-links a:not(.btn) { display: none; }
 }
-
 @media(max-width: 520px) {
-  .grid, .stats {
-    grid-template-columns: 1fr;
-  }
-
-  section {
-    padding: 55px 0;
-  }
-
-  .section-heading h2 {
-    font-size: 28px;
-  }
-
-  .admin-panel {
-    padding: 15px;
-  }
+  .grid, .stats { grid-template-columns: 1fr; }
+  section { padding: 55px 0; }
+  .section-heading h2 { font-size: 28px; }
+  .admin-panel { padding: 15px; }
+  .nav { min-height: 68px; }
+  .logo { font-size: 22px; }
 }
 </style>
 </head>
 
 <body>
-
 <header>
   <div class="container nav">
-    <a href="#" class="logo" onclick="showHome();return false">
-      Vic<span>Dev</span>.
-    </a>
-
-    <nav class="nav-links">
+    <a href="#" class="logo" onclick="showHome();return false">Vic<span>Dev</span>.</a>
+    <nav class="nav-links" aria-label="Main navigation">
       <a href="#services">Services</a>
       <a href="#projects">Projects</a>
       <a href="#contact">Contact</a>
-      <button class="btn btn-dark" onclick="openAdminLogin()">
-        Login as Admin
-      </button>
+      <button class="btn btn-dark" type="button" onclick="openAdminLogin()">Login as Admin</button>
     </nav>
   </div>
 </header>
 
 <main id="homePage">
-
   <section class="hero">
     <div class="container hero-grid">
       <div>
-        <span class="badge">WEB DESIGN & DIGITAL SOLUTIONS</span>
+        <span class="badge">WEB DESIGN &amp; DIGITAL SOLUTIONS</span>
         <h1>We build websites that help <span>businesses grow.</span></h1>
-        <p>
-          Modern websites for schools, small businesses, restaurants
-          and entrepreneurs. Turn your idea into a professional online
-          experience with VicDev.
-        </p>
-
+        <p>Modern websites for schools, small businesses, restaurants and entrepreneurs. Turn your idea into a professional online experience with VicDev.</p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="#services">Explore Services</a>
           <a class="btn btn-outline" href="#contact">Start a Project</a>
         </div>
       </div>
-
       <div class="hero-card">
         <h2>Your idea. Our code.</h2>
-        <p>
-          Professional design, responsive layouts and practical
-          digital solutions for businesses ready to grow.
-        </p>
-
-        <div class="mini-card">
-          <strong>01 / DESIGN</strong>
-          <p>Clean, modern and mobile-friendly websites.</p>
-        </div>
-
-        <div class="mini-card">
-          <strong>02 / DEVELOPMENT</strong>
-          <p>Useful features built around your business needs.</p>
-        </div>
-
-        <div class="mini-card">
-          <strong>03 / SUPPORT</strong>
-          <p>Guidance as your digital presence grows.</p>
-        </div>
+        <p>Professional design, responsive layouts and practical digital solutions for businesses ready to grow.</p>
+        <div class="mini-card"><strong>01 / DESIGN</strong><p>Clean, modern and mobile-friendly websites.</p></div>
+        <div class="mini-card"><strong>02 / DEVELOPMENT</strong><p>Useful features built around your business needs.</p></div>
+        <div class="mini-card"><strong>03 / SUPPORT</strong><p>Guidance as your digital presence grows.</p></div>
       </div>
     </div>
   </section>
@@ -588,61 +167,13 @@ th {
         <h2>Services designed for your goals</h2>
         <p>Choose a service and send a project request to get started.</p>
       </div>
-
       <div class="grid">
-        <article class="card">
-          <div class="card-icon">🌐</div>
-          <h3>Business Websites</h3>
-          <p>Professional websites that introduce your business and services.</p>
-          <button class="btn btn-primary" onclick="orderService('Business Website')">
-            Request Service
-          </button>
-        </article>
-
-        <article class="card">
-          <div class="card-icon">🎓</div>
-          <h3>School Websites</h3>
-          <p>School information, admissions pages and digital school solutions.</p>
-          <button class="btn btn-primary" onclick="orderService('School Website')">
-            Request Service
-          </button>
-        </article>
-
-        <article class="card">
-          <div class="card-icon">🍽️</div>
-          <h3>Restaurant Websites</h3>
-          <p>Menus, galleries, contact information and order enquiries.</p>
-          <button class="btn btn-primary" onclick="orderService('Restaurant Website')">
-            Request Service
-          </button>
-        </article>
-
-        <article class="card">
-          <div class="card-icon">🛒</div>
-          <h3>Online Stores</h3>
-          <p>Product showcases and shopping experiences tailored to your needs.</p>
-          <button class="btn btn-primary" onclick="orderService('Online Store')">
-            Request Service
-          </button>
-        </article>
-
-        <article class="card">
-          <div class="card-icon">📱</div>
-          <h3>Responsive Redesign</h3>
-          <p>Improve the layout and usability of an existing website.</p>
-          <button class="btn btn-primary" onclick="orderService('Website Redesign')">
-            Request Service
-          </button>
-        </article>
-
-        <article class="card">
-          <div class="card-icon">💡</div>
-          <h3>Custom Projects</h3>
-          <p>Discuss your idea and explore a practical development plan.</p>
-          <button class="btn btn-primary" onclick="orderService('Custom Project')">
-            Request Service
-          </button>
-        </article>
+        <article class="card"><div class="card-icon">🌐</div><h3>Business Websites</h3><p>Professional websites that introduce your business and services.</p><button class="btn btn-primary" onclick="orderService('Business Website')">Request Service</button></article>
+        <article class="card"><div class="card-icon">🎓</div><h3>School Websites</h3><p>School information, admissions pages and digital school solutions.</p><button class="btn btn-primary" onclick="orderService('School Website')">Request Service</button></article>
+        <article class="card"><div class="card-icon">🍽️</div><h3>Restaurant Websites</h3><p>Menus, galleries, contact information and order enquiries.</p><button class="btn btn-primary" onclick="orderService('Restaurant Website')">Request Service</button></article>
+        <article class="card"><div class="card-icon">🛒</div><h3>Online Stores</h3><p>Product showcases and shopping experiences tailored to your needs.</p><button class="btn btn-primary" onclick="orderService('Online Store')">Request Service</button></article>
+        <article class="card"><div class="card-icon">📱</div><h3>Responsive Redesign</h3><p>Improve the layout and usability of an existing website.</p><button class="btn btn-primary" onclick="orderService('Website Redesign')">Request Service</button></article>
+        <article class="card"><div class="card-icon">💡</div><h3>Custom Projects</h3><p>Discuss your idea and explore a practical development plan.</p><button class="btn btn-primary" onclick="orderService('Custom Project')">Request Service</button></article>
       </div>
     </div>
   </section>
@@ -651,30 +182,12 @@ th {
     <div class="container">
       <div class="section-heading">
         <h2>Project concepts</h2>
-        <p>
-          Example directions for potential projects. These cards are
-          concepts, not claims of completed client work.
-        </p>
+        <p>Example directions for potential projects. These cards are concepts, not claims of completed client work.</p>
       </div>
-
       <div class="grid">
-        <article class="card">
-          <div class="project-preview">🎓</div>
-          <h3>School Portal Concept</h3>
-          <p>A concept for presenting school information and admissions.</p>
-        </article>
-
-        <article class="card">
-          <div class="project-preview">🛍️</div>
-          <h3>Fashion Store Concept</h3>
-          <p>A concept for showcasing clothing, products and enquiries.</p>
-        </article>
-
-        <article class="card">
-          <div class="project-preview">🍔</div>
-          <h3>Restaurant Concept</h3>
-          <p>A concept for menus, business information and contact details.</p>
-        </article>
+        <article class="card"><div class="project-preview">🎓</div><h3>School Portal Concept</h3><p>A concept for presenting school information and admissions.</p></article>
+        <article class="card"><div class="project-preview">🛍️</div><h3>Fashion Store Concept</h3><p>A concept for showcasing clothing, products and enquiries.</p></article>
+        <article class="card"><div class="project-preview">🍔</div><h3>Restaurant Concept</h3><p>A concept for menus, business information and contact details.</p></article>
       </div>
     </div>
   </section>
@@ -683,12 +196,7 @@ th {
     <div class="container">
       <div class="about-box">
         <h2>Ideas brought to life.</h2>
-        <p>
-          VicDev focuses on building accessible, practical digital
-          experiences for people and businesses. Every project starts
-          with understanding the customer's needs and agreeing on
-          the right solution.
-        </p>
+        <p>VicDev focuses on building accessible, practical digital experiences for people and businesses. Every project starts with understanding the customer's needs and agreeing on the right solution.</p>
       </div>
     </div>
   </section>
@@ -699,81 +207,26 @@ th {
         <h2>Let's discuss your project</h2>
         <p>Tell me what you need and I'll get back to you.</p>
       </div>
-
       <div class="contact-grid">
         <div class="contact-info">
           <h3>Contact VicDev</h3>
-          <p>📱 <strong>WhatsApp:</strong><br>07037965187</br>
-          <p>✉️ <strong>Email:</strong><br>adejoayomide450@gmail.com</p>
-
-          <a class="btn btn-primary"
-             href="https://wa.me/07037965187"
-             target="_blank" rel="noopener">
-            Chat on WhatsApp
-          </a>
-
-          <p class="notice">
-            Orders submitted here are stored in this browser only.
-          </p>
+          <p>📱 <strong>WhatsApp:</strong><br>07037965187</p>
+          <p>✉️ <strong>Email:</strong><br><a href="mailto:adejoayomide450@gmail.com">adejoayomide450@gmail.com</a></p>
+          <a class="btn btn-primary" href="https://wa.me/2347037965187" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>
+          <p class="notice">Orders submitted here are saved to VicDev's online order database.</p>
         </div>
 
         <div class="form-box">
           <h3>Place an order</h3>
-
           <form id="orderForm">
-            <div class="form-group">
-              <label for="customerName">Your name</label>
-              <input id="customerName" required maxlength="100"
-                     placeholder="Enter your name">
-            </div>
-
-            <div class="form-group">
-              <label for="customerPhone">Your phone number</label>
-              <input id="customerPhone" required maxlength="25"
-                     placeholder="Enter your phone number">
-            </div>
-
-            <div class="form-group">
-              <label for="customerEmail">Your email (optional)</label>
-              <input id="customerEmail" type="email" maxlength="150"
-                     placeholder="you@example.com">
-            </div>
-
-            <div class="form-group">
-              <label for="service">Service</label>
-              <select id="service" required>
-                <option value="">Select a service</option>
-                <option>Business Website</option>
-                <option>School Website</option>
-                <option>Restaurant Website</option>
-                <option>Online Store</option>
-                <option>Website Redesign</option>
-                <option>Custom Project</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="budget">Estimated budget (optional)</label>
-              <select id="budget">
-                <option value="">Not decided</option>
-                <option>Below ₦1500000</option>
-                <option>₦400000–₦600000</option>
-                <option>800000–₦1000000</option>
-                <option>Above ₦400000</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="details">Project details</label>
-              <textarea id="details" required maxlength="2000"
-                        placeholder="Describe what you need..."></textarea>
-            </div>
-
-            <button class="btn btn-primary" type="submit">
-              Submit Order
-            </button>
-
-            <p class="notice" id="orderMessage" role="status"></p>
+            <div class="form-group"><label for="customerName">Your name</label><input id="customerName" name="customerName" required maxlength="100" autocomplete="name" placeholder="Enter your name"></div>
+            <div class="form-group"><label for="customerPhone">Your phone number</label><input id="customerPhone" name="customerPhone" required maxlength="25" autocomplete="tel" placeholder="Enter your phone number"></div>
+            <div class="form-group"><label for="customerEmail">Your email (optional)</label><input id="customerEmail" name="customerEmail" type="email" maxlength="150" autocomplete="email" placeholder="you@example.com"></div>
+            <div class="form-group"><label for="service">Service</label><select id="service" name="service" required><option value="">Select a service</option><option>Business Website</option><option>School Website</option><option>Restaurant Website</option><option>Online Store</option><option>Website Redesign</option><option>Custom Project</option></select></div>
+            <div class="form-group"><label for="budget">Estimated budget (optional)</label><select id="budget" name="budget"><option value="">Not decided</option><option>Below ₦150,000</option><option>₦150,000–₦400,000</option><option>₦400,000–₦600,000</option><option>₦600,000–₦1,000,000</option><option>Above ₦1,000,000</option></select></div>
+            <div class="form-group"><label for="details">Project details</label><textarea id="details" name="details" required maxlength="2000" placeholder="Describe what you need..."></textarea></div>
+            <button class="btn btn-primary" type="submit">Submit Order</button>
+            <p class="notice" id="orderMessage" role="status" aria-live="polite"></p>
           </form>
         </div>
       </div>
@@ -785,104 +238,42 @@ th {
   <div class="container">
     <div class="admin-panel">
       <div class="admin-top">
+        <div><h2>VicDev Admin Dashboard</h2><p>Manage customer orders stored in Supabase.</p></div>
         <div>
-          <h2>VicDev Admin Dashboard</h2>
-          <p>Manage orders saved in this browser.</p>
-        </div>
-
-        <div>
-          <button class="btn btn-outline" onclick="exportOrders()">
-            Export Orders
-          </button>
-          <button class="btn btn-dark" onclick="adminLogout()">
-            Logout
-          </button>
+          <button class="btn btn-outline" type="button" onclick="exportOrders()">Export Orders</button>
+          <button class="btn btn-outline" type="button" onclick="refreshOrders()">Refresh</button>
+          <button class="btn btn-dark" type="button" onclick="adminLogout()">Logout</button>
         </div>
       </div>
-
       <div class="stats">
-        <div class="stat">
-          Total Orders
-          <strong id="totalOrders">0</strong>
-        </div>
-
-        <div class="stat">
-          Pending
-          <strong id="pendingOrders">0</strong>
-        </div>
-
-        <div class="stat">
-          Completed
-          <strong id="completedOrders">0</strong>
-        </div>
+        <div class="stat">Total Orders<strong id="totalOrders">0</strong></div>
+        <div class="stat">Pending<strong id="pendingOrders">0</strong></div>
+        <div class="stat">Completed<strong id="completedOrders">0</strong></div>
       </div>
-
-      <div class="form-group">
-        <label for="orderSearch">Search orders</label>
-        <input id="orderSearch"
-               placeholder="Search by name, phone or service"
-               oninput="renderOrders()">
-      </div>
-
+      <div class="form-group"><label for="orderSearch">Search orders</label><input id="orderSearch" placeholder="Search by name, phone or service" autocomplete="off"></div>
       <div class="table-wrap">
         <table>
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Customer</th>
-              <th>Contact</th>
-              <th>Service / Details</th>
-              <th>Status</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-
-          <tbody id="ordersTable"></tbody>
+          <thead><tr><th>Date</th><th>Customer</th><th>Contact</th><th>Service / Details</th><th>Status</th><th>Action</th></tr></thead>
+          <tbody id="ordersTable"><tr><td colspan="6" class="empty">Log in to load orders.</td></tr></tbody>
         </table>
       </div>
-
-      <p class="notice">
-        Important: only orders saved in this browser's localStorage
-        will appear here. Export orders regularly as a backup.
-      </p>
+      <p class="notice">Orders are stored online in Supabase. Keep your admin account secure and log out when using a shared device.</p>
+      <p class="notice" id="adminMessage" role="status" aria-live="polite"></p>
     </div>
   </div>
 </section>
 
-<footer>
-  <div class="container">
-    © <span id="year"></span> VicDev. Ideas brought to life.
-  </div>
-</footer>
+<footer><div class="container">© <span id="year"></span> VicDev. Ideas brought to life.</div></footer>
 
-<div class="modal" id="adminModal" role="dialog"
-     aria-modal="true" aria-labelledby="adminTitle">
+<div class="modal" id="adminModal" role="dialog" aria-modal="true" aria-labelledby="adminTitle">
   <div class="modal-box">
     <h2 id="adminTitle">Admin Login</h2>
-    <p>Sign in to manage orders saved on this device.</p>
-
+    <p>Sign in with your authorized VicDev admin account.</p>
     <form id="adminLoginForm">
-      <div class="form-group">
-        <label for="adminEmail">Admin email</label>
-        <input id="adminEmail" type="email" required
-               autocomplete="username"
-               placeholder="Your admin email">
-      </div>
-
-      <div class="form-group">
-        <label for="adminPassword">Admin password</label>
-        <input id="adminPassword" type="password" required
-               autocomplete="current-password"
-               placeholder="Enter your admin password">
-      </div>
-
-      <p class="notice" id="loginMessage" role="status"></p>
-
-      <div class="modal-actions">
-        <button class="btn btn-primary" type="submit">Login</button>
-        <button class="btn btn-outline" type="button"
-                onclick="closeAdminLogin()">Cancel</button>
-      </div>
+      <div class="form-group"><label for="adminEmail">Admin email</label><input id="adminEmail" type="email" required autocomplete="username" placeholder="Your admin email"></div>
+      <div class="form-group"><label for="adminPassword">Admin password</label><input id="adminPassword" type="password" required autocomplete="current-password" placeholder="Enter your admin password"></div>
+      <p class="notice" id="loginMessage" role="status" aria-live="polite"></p>
+      <div class="modal-actions"><button class="btn btn-primary" type="submit">Login</button><button class="btn btn-outline" type="button" onclick="closeAdminLogin()">Cancel</button></div>
     </form>
   </div>
 </div>
@@ -891,35 +282,31 @@ th {
 "use strict";
 
 /*
-  LOCAL-ONLY DEMO
-
-  This is a browser-side admin check, NOT secure authentication.
-  Anyone who can inspect or modify the page code may bypass it.
-
-  Change the password before testing, but do not treat this as
-  secure protection for a public production website.
-*/
-
+ * VicDev Supabase configuration.
+ * The publishable key is intended for public browser use.
+ * NEVER put a Supabase secret or service_role key in this file.
+ * RLS policies in Supabase must protect the database.
+ */
+const SUPABASE_URL = "https://zvlepayustylbjrozyma.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_qg7e-5zXX8BAXob3PcrW_A_TD6dqif1";
 const ADMIN_EMAIL = "adejoayomide450@gmail.com";
-const ADMIN_PASSWORD = "VicDevAdmin2026!";
 
-const ORDERS_KEY = "vicdev_orders_v1";
-const SESSION_KEY = "vicdev_admin_session_v1";
+const db = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY
+);
 
-document.getElementById("year").textContent =
-  new Date().getFullYear();
+document.getElementById("year").textContent = new Date().getFullYear();
 
-function readOrders() {
-  try {
-    const saved = JSON.parse(localStorage.getItem(ORDERS_KEY) || "[]");
-    return Array.isArray(saved) ? saved : [];
-  } catch (error) {
-    return [];
-  }
-}
+let ordersCache = [];
+let renderRequest = 0;
 
-function saveOrders(orders) {
-  localStorage.setItem(ORDERS_KEY, JSON.stringify(orders));
+function setMessage(elementId, text, type = "") {
+  const el = document.getElementById(elementId);
+  el.textContent = text;
+  el.classList.remove("message-success", "message-error");
+  if (type === "success") el.classList.add("message-success");
+  if (type === "error") el.classList.add("message-error");
 }
 
 function showHome() {
@@ -928,9 +315,20 @@ function showHome() {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-function openAdminLogin() {
-  document.getElementById("loginMessage").textContent = "";
+async function openAdminLogin() {
+  setMessage("loginMessage", "");
+  try {
+    const { data, error } = await db.auth.getSession();
+    if (!error && data.session && isAuthorizedUser(data.session.user)) {
+      closeAdminLogin();
+      await showAdmin();
+      return;
+    }
+  } catch (err) {
+    console.error("Session check failed:", err);
+  }
   document.getElementById("adminModal").style.display = "flex";
+  setTimeout(() => document.getElementById("adminEmail").focus(), 50);
 }
 
 function closeAdminLogin() {
@@ -942,123 +340,200 @@ function orderService(serviceName) {
   document.getElementById("contact").scrollIntoView({ behavior: "smooth" });
 }
 
-document.getElementById("orderForm").addEventListener("submit", function(event) {
+function isAuthorizedUser(user) {
+  return Boolean(user && user.email &&
+    user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase());
+}
+
+// Customer order submission
+document.getElementById("orderForm").addEventListener("submit", async function(event) {
   event.preventDefault();
 
+  const form = this;
+  const button = form.querySelector('button[type="submit"]');
+  setMessage("orderMessage", "");
+
   const order = {
-    id: Date.now().toString(),
-    createdAt: new Date().toISOString(),
-    name: document.getElementById("customerName").value.trim(),
+    customer_name: document.getElementById("customerName").value.trim(),
     phone: document.getElementById("customerPhone").value.trim(),
-    email: document.getElementById("customerEmail").value.trim(),
+    email: document.getElementById("customerEmail").value.trim() || null,
     service: document.getElementById("service").value,
-    budget: document.getElementById("budget").value,
+    budget: document.getElementById("budget").value || null,
     details: document.getElementById("details").value.trim(),
     status: "Pending"
   };
 
-  if (!order.name || !order.phone || !order.service || !order.details) {
-    document.getElementById("orderMessage").textContent =
-      "Please complete all required fields.";
+  if (!order.customer_name || !order.phone || !order.service || !order.details) {
+    setMessage("orderMessage", "Please complete all required fields.", "error");
     return;
   }
 
+  button.disabled = true;
+  button.textContent = "Submitting...";
+
   try {
-    const orders = readOrders();
-    orders.unshift(order);
-    saveOrders(orders);
+    const { error } = await db.from("vicdev_orders").insert([order]);
+    if (error) {
+      console.error("Order submission error:", error);
+      setMessage("orderMessage", "We couldn't submit your order. Please try again or contact VicDev on WhatsApp.", "error");
+      return;
+    }
 
-    document.getElementById("orderMessage").textContent =
-      "Order saved in this browser. Contact VicDev on WhatsApp for follow-up.";
-
-    this.reset();
-
-    // Do not open WhatsApp automatically; let the customer choose.
-  } catch (error) {
-    document.getElementById("orderMessage").textContent =
-      "Unable to save the order. Browser storage may be full or disabled.";
+    form.reset();
+    setMessage("orderMessage", "Your order was submitted successfully! VicDev will contact you.", "success");
+  } catch (err) {
+    console.error("Order submission failed:", err);
+    setMessage("orderMessage", "Connection error. Check your internet and try again.", "error");
+  } finally {
+    button.disabled = false;
+    button.textContent = "Submit Order";
   }
 });
 
-document.getElementById("adminLoginForm").addEventListener("submit", function(event) {
+// Admin sign-in uses Supabase Authentication (no password embedded in HTML).
+document.getElementById("adminLoginForm").addEventListener("submit", async function(event) {
   event.preventDefault();
 
-  const email = document.getElementById("adminEmail").value.trim().toLowerCase();
+  const email = document.getElementById("adminEmail").value.trim();
   const password = document.getElementById("adminPassword").value;
+  const button = this.querySelector('button[type="submit"]');
 
-  if (
-    email === ADMIN_EMAIL.toLowerCase() &&
-    password === ADMIN_PASSWORD
-  ) {
-    sessionStorage.setItem(SESSION_KEY, "true");
+  setMessage("loginMessage", "");
+  button.disabled = true;
+  button.textContent = "Signing in...";
+
+  try {
+    const { data, error } = await db.auth.signInWithPassword({ email, password });
+
+    if (error) {
+      console.error("Supabase sign-in error:", error);
+      setMessage("loginMessage", "Login failed. Check your email and password.", "error");
+      return;
+    }
+
+    if (!isAuthorizedUser(data.user)) {
+      await db.auth.signOut();
+      setMessage("loginMessage", "This account is not authorized to access VicDev administration.", "error");
+      return;
+    }
+
     closeAdminLogin();
     this.reset();
-    showAdmin();
-  } else {
-    document.getElementById("loginMessage").textContent =
-      "Incorrect email or password.";
+    await showAdmin();
+  } catch (err) {
+    console.error("Sign-in failed:", err);
+    setMessage("loginMessage", "Unable to sign in. Check your internet connection.", "error");
+  } finally {
+    button.disabled = false;
+    button.textContent = "Login";
   }
 });
 
-function isAdminLoggedIn() {
-  return sessionStorage.getItem(SESSION_KEY) === "true";
+async function getAuthorizedSession() {
+  const { data, error } = await db.auth.getSession();
+  if (error || !data.session || !isAuthorizedUser(data.session.user)) return null;
+  return data.session;
 }
 
-function showAdmin() {
-  if (!isAdminLoggedIn()) {
-    openAdminLogin();
+async function showAdmin() {
+  const session = await getAuthorizedSession();
+  if (!session) {
+    document.getElementById("adminSection").style.display = "none";
+    document.getElementById("homePage").style.display = "block";
+    await openAdminLogin();
     return;
   }
 
   document.getElementById("homePage").style.display = "none";
   document.getElementById("adminSection").style.display = "block";
-  renderOrders();
-
   window.scrollTo({ top: 0, behavior: "smooth" });
+  await renderOrders();
 }
 
-function adminLogout() {
-  sessionStorage.removeItem(SESSION_KEY);
+async function adminLogout() {
+  const { error } = await db.auth.signOut();
+  if (error) console.error("Sign-out error:", error);
+  ordersCache = [];
   document.getElementById("adminSection").style.display = "none";
   document.getElementById("homePage").style.display = "block";
+  setMessage("adminMessage", "");
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-function renderOrders() {
-  if (!isAdminLoggedIn()) return;
+async function refreshOrders() {
+  await renderOrders();
+}
 
-  const orders = readOrders();
-  const search = document.getElementById("orderSearch").value
-    .trim().toLowerCase();
+document.getElementById("orderSearch").addEventListener("input", () => {
+  renderOrders();
+});
 
-  document.getElementById("totalOrders").textContent = orders.length;
+// Load online orders, then render filtered results.
+async function renderOrders() {
+  const requestId = ++renderRequest;
+  const session = await getAuthorizedSession();
 
-  document.getElementById("pendingOrders").textContent =
-    orders.filter(order => order.status === "Pending").length;
-
-  document.getElementById("completedOrders").textContent =
-    orders.filter(order => order.status === "Completed").length;
+  if (!session) {
+    document.getElementById("ordersTable").replaceChildren();
+    await openAdminLogin();
+    return;
+  }
 
   const tbody = document.getElementById("ordersTable");
   tbody.replaceChildren();
 
-  const filtered = orders.filter(order => {
-    const searchable = [
-      order.name, order.phone, order.email,
-      order.service, order.details, order.status
-    ].join(" ").toLowerCase();
+  const loadingRow = document.createElement("tr");
+  const loadingCell = document.createElement("td");
+  loadingCell.colSpan = 6;
+  loadingCell.className = "empty";
+  loadingCell.textContent = "Loading orders...";
+  loadingRow.appendChild(loadingCell);
+  tbody.appendChild(loadingRow);
 
-    return searchable.includes(search);
-  });
+  const { data: orders, error } = await db
+    .from("vicdev_orders")
+    .select("*")
+    .order("created_at", { ascending: false });
+
+  if (requestId !== renderRequest) return;
+
+  if (error) {
+    console.error("Loading orders failed:", error);
+    tbody.replaceChildren();
+    const row = document.createElement("tr");
+    const cell = document.createElement("td");
+    cell.colSpan = 6;
+    cell.className = "empty";
+    cell.textContent = "Could not load orders. Check your database table, RLS policies, and admin account.";
+    row.appendChild(cell);
+    tbody.appendChild(row);
+    setMessage("adminMessage", "Database error: " + error.message, "error");
+    return;
+  }
+
+  setMessage("adminMessage", "");
+  ordersCache = orders || [];
+
+  document.getElementById("totalOrders").textContent = ordersCache.length;
+  document.getElementById("pendingOrders").textContent =
+    ordersCache.filter(order => order.status === "Pending").length;
+  document.getElementById("completedOrders").textContent =
+    ordersCache.filter(order => order.status === "Completed").length;
+
+  const search = document.getElementById("orderSearch").value.trim().toLowerCase();
+  const filtered = ordersCache.filter(order => [
+    order.customer_name, order.phone, order.email, order.service,
+    order.details, order.status, order.budget
+  ].join(" ").toLowerCase().includes(search));
+
+  tbody.replaceChildren();
 
   if (filtered.length === 0) {
     const row = document.createElement("tr");
     const cell = document.createElement("td");
     cell.colSpan = 6;
     cell.className = "empty";
-    cell.textContent = orders.length === 0
-      ? "No orders yet."
-      : "No matching orders.";
+    cell.textContent = ordersCache.length === 0 ? "No orders yet." : "No matching orders.";
     row.appendChild(cell);
     tbody.appendChild(row);
     return;
@@ -1074,38 +549,42 @@ function renderOrders() {
       return cell;
     }
 
-    addCell(new Date(order.createdAt).toLocaleString());
-    addCell(order.name);
+    addCell(order.created_at ? new Date(order.created_at).toLocaleString() : "—");
+    addCell(order.customer_name);
     addCell([order.phone, order.email].filter(Boolean).join("\n"));
 
     const serviceCell = addCell("");
     serviceCell.textContent =
       order.service + "\nBudget: " + (order.budget || "Not specified") +
-      "\n" + order.details;
+      "\n" + (order.details || "");
 
     const statusCell = document.createElement("td");
     const select = document.createElement("select");
     select.className = "status-select";
-
-    ["Pending", "Contacted", "In Progress", "Completed", "Cancelled"]
-      .forEach(status => {
-        const option = document.createElement("option");
-        option.value = status;
-        option.textContent = status;
-        select.appendChild(option);
-      });
-
+    ["Pending", "Contacted", "In Progress", "Completed", "Cancelled"].forEach(status => {
+      const option = document.createElement("option");
+      option.value = status;
+      option.textContent = status;
+      select.appendChild(option);
+    });
     select.value = order.status || "Pending";
+    select.setAttribute("aria-label", "Status for " + (order.customer_name || "order"));
 
-    select.addEventListener("change", function() {
-      const allOrders = readOrders();
-      const index = allOrders.findIndex(item => item.id === order.id);
+    select.addEventListener("change", async function() {
+      const newStatus = this.value;
+      select.disabled = true;
 
-      if (index !== -1) {
-        allOrders[index].status = this.value;
-        saveOrders(allOrders);
-        renderOrders();
+      const { error } = await db
+        .from("vicdev_orders")
+        .update({ status: newStatus })
+        .eq("id", order.id);
+
+      if (error) {
+        console.error("Status update failed:", error);
+        alert("Could not update status: " + error.message);
       }
+
+      await renderOrders();
     });
 
     statusCell.appendChild(select);
@@ -1115,54 +594,74 @@ function renderOrders() {
     const deleteButton = document.createElement("button");
     deleteButton.className = "small-btn";
     deleteButton.textContent = "Delete";
+    deleteButton.addEventListener("click", async function() {
+      if (!confirm("Permanently delete this order?")) return;
+      deleteButton.disabled = true;
 
-    deleteButton.addEventListener("click", function() {
-      if (!confirm("Delete this order permanently from this browser?")) {
-        return;
+      const { error } = await db
+        .from("vicdev_orders")
+        .delete()
+        .eq("id", order.id);
+
+      if (error) {
+        console.error("Order deletion failed:", error);
+        alert("Could not delete order: " + error.message);
       }
 
-      saveOrders(readOrders().filter(item => item.id !== order.id));
-      renderOrders();
+      await renderOrders();
     });
 
     actionCell.appendChild(deleteButton);
     row.appendChild(actionCell);
-
     tbody.appendChild(row);
   });
 }
 
-function exportOrders() {
-  if (!isAdminLoggedIn()) {
-    alert("Please log in as admin.");
+async function exportOrders() {
+  const session = await getAuthorizedSession();
+  if (!session) {
+    alert("Please log in as the authorized admin.");
     return;
   }
 
-  const orders = readOrders();
-  const blob = new Blob(
-    [JSON.stringify(orders, null, 2)],
-    { type: "application/json" }
-  );
+  const { data: orders, error } = await db
+    .from("vicdev_orders")
+    .select("*")
+    .order("created_at", { ascending: false });
 
+  if (error) {
+    console.error("Export failed:", error);
+    alert("Could not export orders: " + error.message);
+    return;
+  }
+
+  const blob = new Blob([JSON.stringify(orders || [], null, 2)], {
+    type: "application/json"
+  });
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
-
   link.href = url;
   link.download = "vicdev-orders-backup.json";
+  document.body.appendChild(link);
   link.click();
-
-  URL.revokeObjectURL(url);
+  link.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
+// Close the login modal when clicking the backdrop or pressing Escape.
 document.getElementById("adminModal").addEventListener("click", function(event) {
   if (event.target === this) closeAdminLogin();
 });
-
 document.addEventListener("keydown", function(event) {
   if (event.key === "Escape") closeAdminLogin();
 });
-</script>
 
+// If an authenticated session already exists, the admin can reopen the dashboard.
+db.auth.onAuthStateChange((event, session) => {
+  if (event === "SIGNED_OUT") {
+    document.getElementById("adminSection").style.display = "none";
+  }
+});
+</script>
 </body>
 </html>
-
